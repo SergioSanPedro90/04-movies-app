@@ -1,9 +1,9 @@
 import { moviesApi } from "@/core/api/movies-api";
 import { MovieMapper } from "@/infrastructure/mappers/movies.mappers";
 
-export const nowPlayingActions = async () => {
+export const popularMoviesActions = async () => {
   try {
-    const { data } = await moviesApi.get("/now_playing");
+    const { data } = await moviesApi.get("/popular");
 
     const movies = data.results.map(MovieMapper.fromTheMovieDBToMovie);
 

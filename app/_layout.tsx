@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import "../global.css"
+import { View, Text } from "react-native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "../global.css";
+import { Stack } from "expo-router";
+import { HeaderShownContext } from "@react-navigation/elements";
+
+const queryClient = new QueryClient()
 
 const RootLayout = () => {
-
   return (
-    <View className='flex justify-center items-center'>
-      <Text>RootLayout</Text>
-    </View>
-  )
-}
-export default RootLayout
+    <QueryClientProvider client={queryClient}>
+      <Stack 
+      screenOptions={{
+        headerShown: false
+      }
+      }/>
+    </QueryClientProvider>
+  );
+};
+export default RootLayout;
