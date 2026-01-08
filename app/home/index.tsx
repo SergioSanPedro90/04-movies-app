@@ -28,13 +28,13 @@ const HomeScreen = () => {
         <MoviesCarousel movies={nowPlayingQuery.data ?? []} />
 
         {/* PELICULAS POPULARES */}
-        <MovieHorizontalList movie={popularQuery.data ?? []} />
+        <MovieHorizontalList movie={popularQuery.data?.pages.flat() ?? []} loadNextPage={ popularQuery.fetchNextPage } />
 
         {/* MEJOR VALORADAS */}
-        <MoviesTopRated movie={topRatedQuery.data ?? []} />
+        <MovieHorizontalList movie={topRatedQuery.data?.pages.flat() ?? []} loadNextPage={ topRatedQuery.fetchNextPage } />
 
         {/* PROXIMAMENTE */}
-        <UpComingVideos movie={upComingQuery.data ?? []} />
+        <MovieHorizontalList movie={upComingQuery.data?.pages.flat() ?? []} loadNextPage={ upComingQuery.fetchNextPage } />
       </View>
     </ScrollView>
   );

@@ -1,9 +1,19 @@
 import { moviesApi } from "@/core/api/movies-api";
 import { MovieMapper } from "@/infrastructure/mappers/movies.mappers";
 
-export const topRatedMoviesActions = async () => {
+
+interface Options {
+  page?: number,
+  limit?: number
+}
+
+export const topRatedMoviesActions = async ({page = 1, limit}: Options) => {
   try {
-    const { data } = await moviesApi.get("/top_rated");
+    const { data } = await moviesApi.get("/top_rated", {
+      params: {
+        page: page
+      }
+    });
 
     const movies = data.results.map(MovieMapper.fromTheMovieDBToMovie);
 
