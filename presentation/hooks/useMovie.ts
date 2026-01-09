@@ -1,4 +1,5 @@
 import { getMovieByIdAction } from "@/core/actions/movie/get-movie-by-id.actions"
+import { getActors } from "@/core/actions/movies/actors.action"
 import { useQuery } from "@tanstack/react-query"
 
 
@@ -13,8 +14,15 @@ const useMovie = ( id: number) => {
         staleTime: 1000 * 60 * 60 * 24
     })
 
+    const actorsQuery = useQuery({
+        queryKey: ['movie', id, 'actors'],
+        queryFn: () => getActors(id),
+        staleTime: 1000 * 60 * 60 * 24
+    })
+
   return {
-    movieQuery
+    movieQuery,
+    actorsQuery
   }
 }
 export default useMovie

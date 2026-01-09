@@ -1,3 +1,4 @@
+import ActorsInMovie from '@/presentation/components/movie/ActorsInMovie'
 import MovieDescription from '@/presentation/components/movie/MovieDescription'
 import MovieHeader from '@/presentation/components/movie/MovieHeader'
 import useMovie from '@/presentation/hooks/useMovie'
@@ -8,7 +9,7 @@ import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
 const MovieDetails = () => {
 
     const { id } = useLocalSearchParams()
-    const { movieQuery } = useMovie(+id)
+    const { movieQuery, actorsQuery } = useMovie(+id)
     
   if (movieQuery.isLoading || !movieQuery.data) {
     return (
@@ -27,6 +28,7 @@ const MovieDetails = () => {
       poster={movieQuery.data.poster}
        />
        <MovieDescription movie={movieQuery.data}/>
+       <ActorsInMovie cast={actorsQuery.data ?? []}/>
     </ScrollView>
   )
 }
